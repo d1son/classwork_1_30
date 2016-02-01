@@ -17,39 +17,58 @@ connection.connect();
  
 // });
 
-var showBears = function(){
-	connection.query("SELECT * FROM happy_bears;", function(err, rows, fields) {
-		if(err) throw err;
+// var showBears = function(){
+// 	connection.query("SELECT * FROM happy_bears;", function(err, rows, fields) {
+// 		if(err) throw err;
 
-		console.log(rows);
-	});
-};
+// 		console.log(rows);
+// 	});
+// };
 
-var addBearName = function(){
-	connection.query("INSERT INTO happy_bears (name, favorite_food, personality) VALUES (?,?,?)", ["happy", "burritos", "mad"], function(err, results) {
-		if (err) throw err;
+// var addBearName = function(){
+// 	connection.query("INSERT INTO happy_bears (name, favorite_food, personality) VALUES (?,?,?)", ["happy", "burritos", "mad"], function(err, results) {
+// 		if (err) throw err;
 
-		console.log("Insert finished!!");
+// 		console.log("Insert finished!!");
 
-	})
-};
+// 	})
+// };
 
-var deleteBear = function(){
-	var query = "DELETE FROM happy_bears WHERE id=?";
-	var idToBeDeleted = process.argv[2]; //user input, user can directly change database from command line
+// var deleteBear = function(){
+// 	var query = "DELETE FROM happy_bears WHERE id=?";
+// 	var idToBeDeleted = process.argv[2]; //user input, user can directly change database from command line
 
 
-	connection.query(query, idToBeDeleted, function(err, results){
-		if(err){
-			throw err;
-		}
-		console.log("Bear " + idToBeDeleted + " was deleted.")
-	});
-}
+// 	connection.query(query, idToBeDeleted, function(err, results){
+// 		if(err){
+// 			throw err;
+// 		}
+// 		console.log("Bear " + idToBeDeleted + " was deleted.")
+// 	});
+// }
 
-deleteBear();
-// addBearName();
-showBears();
+// deleteBear(); // runs deleteBear
+// // addBearName(); // runs addBearName
+// showBears(); // runs showBears 
+
+var prompt = require('prompt');
+prompt.start();
+
+prompt.get(['first_name', 'last_name', 'age', 'time_of_siting'], function(err, result) {
+    
+    var report = `FBI aliens sighting report:
+
+    Eye witness name is ${result.first_name} ${result.last_name} at age: ${result.age}
+    According to eye witness sighting happened sometime around ${result.time_of_siting} near Burbank
+    Another possible witness includes a person by the name of Alice
+    The sighting is described as: Some monster thingy and the witness's initial thoughts are: WOAH MAN!
+    This is the witness's 11th encounter
+
+    Report conclusion: Complete`;
+
+    console.log(report);
+});
  
 
 connection.end();
+
